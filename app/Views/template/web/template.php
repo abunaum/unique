@@ -40,9 +40,15 @@
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Templates</a>
               <div class="dropdown-menu">
-                <a href="<?= base_url('logo') ?>" class="dropdown-item">Logos</a>
-                <a href="#" class="dropdown-item">Buycraft Icons</a>
-                <a href="#" class="dropdown-item">Youtube Channel Art</a>
+                <?php
+                $db      = \Config\Database::connect();
+                $menu = $db->table('menu')->get()->getResult();
+                ?>
+                <?php
+                foreach ($menu as $m) :
+                ?>
+                  <a href="<?= base_url('category/' . $m->id) ?>" class="dropdown-item"><?= $m->nama; ?></a>
+                <?php endforeach; ?>
               </div>
             </div>
             <div class="nav-item dropdown">
@@ -80,9 +86,15 @@
               <li><a href="<?= base_url('layanan') ?>">Ketentuan Layanan</a></li>
               <li><a href="<?= base_url('privasi') ?>">Kebijakan Privasi</a></li>
               <li><a href="<?= base_url('tentang') ?>">Tentang Kami</a></li>
-              <li><a href="#">Logos</a></li>
-              <li><a href="#">Buycraft Icons</a></li>
-              <li><a href="#">Youtube Channel Art</a></li>
+              <?php
+              $db      = \Config\Database::connect();
+              $menu = $db->table('menu')->get()->getResult();
+              ?>
+              <?php
+              foreach ($menu as $m) :
+              ?>
+                <li><a href="<?= base_url('category/' . $m->id) ?>"><?= $m->nama; ?></a></li>
+              <?php endforeach; ?>
             </ul>
           </div>
         </div>

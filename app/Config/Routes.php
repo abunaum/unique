@@ -38,7 +38,7 @@ $routes->get('/tentang', 'Home::tentang');
 $routes->get('/logo', 'Home::logo');
 
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
-    $routes->get('/', 'admin::index');
+    $routes->get('/', 'Admin::index');
 });
 
 /*

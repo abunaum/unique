@@ -1,4 +1,6 @@
-<?php namespace App\Filters;
+<?php
+
+namespace App\Filters;
 
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -17,8 +19,7 @@ class LoginFilter implements FilterInterface
 	 */
 	public function before(RequestInterface $request, $params = null)
 	{
-		if (! function_exists('logged_in'))
-		{
+		if (!function_exists('logged_in')) {
 			helper('auth');
 		}
 
@@ -28,24 +29,22 @@ class LoginFilter implements FilterInterface
 			->stripQuery('token');
 
 		$config = config(App::class);
-		if($config->forceGlobalSecureRequests)
-		{
+		if ($config->forceGlobalSecureRequests) {
 			# Remove "https:/"
 			$current = substr($current, 7);
 		}
 
 		// Make sure this isn't already a login route
-		if (in_array((string)$current, [route_to('login'), route_to('forgot'), route_to('reset-password'), route_to('register'), route_to('activate-account')]))
-		{
+		if (in_array((string)$current, [route_to('login'), route_to('forgot'), route_to('reset-password'), route_to('register'), route_to('activate-account')])) {
 			return;
 		}
 
 		// if no user is logged in then send to the login form
 		$authenticate = service('authentication');
-		if (! $authenticate->check())
-		{
+		if (!$authenticate->check()) {
 			session()->set('redirect_url', current_url());
-			return redirect('login');
+			return redirect()->to(base_url('login'));
+			// return redirect('login');
 		}
 	}
 

@@ -51,7 +51,6 @@ class AuthController extends Controller
 
 			return redirect()->to($redirectURL);
 		}
-
 		// Set a return URL if none is specified
 		$_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? site_url('/');
 
