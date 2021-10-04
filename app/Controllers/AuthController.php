@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\CLIRequest;
+use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\Session\Session;
 use Myth\Auth\Config\Auth as AuthConfig;
 use Myth\Auth\Entities\User;
@@ -10,6 +12,13 @@ use Myth\Auth\Models\UserModel;
 
 class AuthController extends Controller
 {
+	/**
+	 * Instance of the main Request object.
+	 *
+	 * @var CLIRequest|IncomingRequest
+	 */
+	protected $request;
+
 	protected $auth;
 
 	/**
@@ -46,13 +55,13 @@ class AuthController extends Controller
 		// No need to show a login form if the user
 		// is already logged in.
 		if ($this->auth->check()) {
-			$redirectURL = session('redirect_url') ?? site_url('/');
+			$redirectURL = session('redirect_url') ?? base_url();
 			unset($_SESSION['redirect_url']);
 
 			return redirect()->to($redirectURL);
 		}
 		// Set a return URL if none is specified
-		$_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? site_url('/');
+		$_SESSION['redirect_url'] = session('redirect_url') ?? previous_url() ?? base_url();
 
 		return $this->_render($this->config->views['login'], ['config' => $this->config]);
 	}
@@ -92,7 +101,7 @@ class AuthController extends Controller
 			return redirect()->to(route_to('reset-password') . '?token=' . $this->auth->user()->reset_hash)->withCookies();
 		}
 
-		$redirectURL = session('redirect_url') ?? site_url('/');
+		$redirectURL = session('redirect_url') ?? base_url();
 		unset($_SESSION['redirect_url']);
 
 		return redirect()->to($redirectURL)->withCookies()->with('message', lang('Auth.loginSuccess'));
@@ -107,7 +116,7 @@ class AuthController extends Controller
 			$this->auth->logout();
 		}
 
-		return redirect()->to(site_url('/'));
+		return redirect()->to(base_url());
 	}
 
 	//--------------------------------------------------------------------

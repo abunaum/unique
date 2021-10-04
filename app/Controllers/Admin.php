@@ -8,6 +8,9 @@ class Admin extends BaseController
 {
     public function index()
     {
-        echo 'aaa';
+        $data = [
+            'judul' => 'Beranda'
+        ];
+        return view('admin/beranda', $data);
     }
 }

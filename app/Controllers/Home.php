@@ -6,10 +6,7 @@ class Home extends BaseController
 {
     public function index()
     {
-        $data = [
-            'menu' => 'aaa'
-        ];
-        return view('web/beranda', $data);
+        return view('web/beranda');
     }
 
     public function layanan()
@@ -26,7 +23,7 @@ class Home extends BaseController
     {
         return view('web/tentang');
     }
-    
+
     public function logo()
     {
         $data = [

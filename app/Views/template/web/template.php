@@ -9,7 +9,7 @@
   <meta content="Bootstrap Ecommerce" name="description">
 
   <!-- Favicon -->
-  <link href="images/favicon.ico" rel="icon">
+  <link href="<?= base_url('images/favicon.ico') ?>" rel="icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- Template Stylesheet -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="<?= base_url('css/style.css') ?>" rel="stylesheet">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
     <header class="header_section">
       <nav class="navbar navbar-expand-lg custom_nav-container ">
         <a class="navbar-brand" href="<?= base_url() ?>">
-          <img src="images/header-logo.png" alt="" />
+          <img src="<?= base_url('images/header-logo.png') ?>" alt="" />
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,11 +59,11 @@
             </div>
             <div class="nav-item dropdown">
               <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
-                <img src="images/id.png" alt="flag" class="mr-2 " title="Indonesia"> ID <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
+                <img src="<?= base_url('images/id.png') ?>" alt="flag" class="mr-2 " title="Indonesia"> ID <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
               </a>
               <div class="dropdown-menu">
                 <a href="<?= base_url('en') ?>" class="dropdown-item">
-                  <img src="images/uk.png" class="mr-2" alt="flag">
+                  <img src="<?= base_url('images/uk.png') ?>" class="mr-2" alt="flag">
                   EN
                 </a>
               </div>
@@ -102,17 +102,17 @@
           <div class="col-md-12 pl-md-0">
             <div class="payment-method">
               <h3>Saluran Pembayaran</h3>
-              <img height="65" src="images/qris.png" />
-              <img height="65" src="images/bca.png" />
-              <img height="65" src="images/bri.png" />
-              <img height="65" src="images/bni.png" />
-              <img height="65" src="images/maybank.png" />
-              <img height="65" src="images/mandiri.png" />
-              <img height="65" src="images/cimb.png" />
-              <img height="65" src="images/permata.png" />
-              <img height="65" src="images/alfamart.png" />
-              <img height="65" src="images/alfamidi.png" />
-              <img height="65" src="images/paypal.png" />
+              <img height="65" src="<?= base_url('images/qris.png') ?>" />
+              <img height="65" src="<?= base_url('images/bca.png') ?>" />
+              <img height="65" src="<?= base_url('images/bri.png') ?>" />
+              <img height="65" src="<?= base_url('images/bni.png') ?>" />
+              <img height="65" src="<?= base_url('images/maybank.png') ?>" />
+              <img height="65" src="<?= base_url('images/mandiri.png') ?>" />
+              <img height="65" src="<?= base_url('images/cimb.png') ?>" />
+              <img height="65" src="<?= base_url('images/permata.png') ?>" />
+              <img height="65" src="<?= base_url('images/alfamart.png') ?>" />
+              <img height="65" src="<?= base_url('images/alfamidi.png') ?>" />
+              <img height="65" src="<?= base_url('images/paypal.png') ?>" />
             </div>
           </div>
         </div>

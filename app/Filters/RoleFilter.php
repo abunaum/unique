@@ -38,7 +38,7 @@ class RoleFilter implements FilterInterface
 
 		// if no user is logged in then send to the login form
 		if (!$authenticate->check()) {
-			session()->set('redirect_url', current_url());
+			session()->set('redirect_url', base_url(uri_string()));
 			return redirect()->to(base_url('login'));
 			// return redirect('login');
 		}
@@ -53,7 +53,7 @@ class RoleFilter implements FilterInterface
 		}
 
 		if ($authenticate->silent()) {
-			$redirectURL = session('redirect_url') ?? '/';
+			$redirectURL = session('redirect_url') ?? base_url();
 			unset($_SESSION['redirect_url']);
 			return redirect()->to($redirectURL)->with('error', lang('Auth.notEnoughPrivilege'));
 		} else {
