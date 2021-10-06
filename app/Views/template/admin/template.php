@@ -30,9 +30,9 @@
 
     <!-- Main CSS-->
     <link href="https://cdn.jsdelivr.net/gh/abunaum/naum-market-css-js@master/mypanel/css/theme.css" rel="stylesheet" media="all">
-    <link rel="shortcut icon" href="<?= base_url('tokolancer.ico'); ?>">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/abunaum/naum-market-css-js@master/js/swal2/sweetalert2.min.css">
-
+    <link rel="shortcut icon" href="<?= base_url('images/favicon.ico') ?>">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 </head>
 
 <body class="animsition">
@@ -106,9 +106,8 @@
     <!-- Main JS-->
     <script src="https://cdn.jsdelivr.net/gh/abunaum/naum-market-css-js@master/mypanel/js/main.js"></script>
     <!-- Extra JS Gua-->
-    <script src="https://cdn.jsdelivr.net/gh/abunaum/naum-market-css-js@master/js/swal2/sweetalert2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/abunaum/naum-market-css-js@master/js/swal2/swall.js"></script>
     <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <script src="<?= base_url('js/currency.js') ?>"></script>
 
 </body>
 

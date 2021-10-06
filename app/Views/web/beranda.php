@@ -172,4 +172,4 @@
     <div>
       <!-- Feature End-->
 
-      <!-- <?= $this->endSection(); ?> -->
+      <?= $this->endSection(); ?>

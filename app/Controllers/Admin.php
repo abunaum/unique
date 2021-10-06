@@ -13,4 +13,15 @@ class Admin extends BaseController
         ];
         return view('admin/beranda', $data);
     }
+
+    public function item()
+    {
+        $item = $this->item->findAll();
+        $data = [
+            'judul' => 'Item',
+            'item' => $item,
+            'validation' => \Config\Services::validation()
+        ];
+        return view('admin/item', $data);
+    }
 }

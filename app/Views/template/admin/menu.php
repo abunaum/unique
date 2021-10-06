@@ -9,9 +9,6 @@
         <li>
             <a href="<?= base_url('admin/item'); ?>">Item</a>
         </li>
-        <li>
-            <a href="<?= base_url('admin/subitem'); ?>">Sub Item</a>
-        </li>
     </ul>
 </li>
 <li class="has-sub">
