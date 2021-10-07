@@ -41,6 +41,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('/', 'Admin::index');
     $routes->get('item', 'Admin::item');
     $routes->post('tambah_item', 'AdminProses::tambah_item');
+    $routes->delete('item/(:num)', 'AdminProses::hapus_item/$1');
 });
 
 /*

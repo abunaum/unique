@@ -18,16 +18,24 @@
                         <?php $nomor = 1 ?>
                         <?php foreach ($item as $i) : ?>
                             <tr>
+                                <?php
+                                $nama = $i['nama'];
+                                $id = $i['id'];
+                                ?>
                                 <td><?= $nomor++ ?></td>
-                                <td><?= $i['nama'] ?></td>
+                                <td><?= $nama ?></td>
                                 <td><?= 'Rp.' . number_format($i['harga']) ?></td>
                                 <td>
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editModal">
                                         Edit
                                     </button>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal">
-                                        Hapus
-                                    </button>
+                                    <form action="<?= base_url('admin/item/' . $id) ?>" method="post" class="d-inline" id="form-hapus-id<?= $id; ?>">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="button" class="btn btn-danger" onclick="hapusitem('<?= $nama; ?>','<?= $id; ?>')">
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -42,6 +50,21 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function hapusitem(nama, id) {
+        Swal.fire({
+            title: 'Yakin mau hapus ' + nama + id + ' ?',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+            showLoaderOnConfirm: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("form-hapus-id" + id).submit();
+            }
+        })
+    }
+</script>
 <?php if (session()->getFlashdata('error')) : ?>
     <?php
     $error = session()->getFlashdata('error');
@@ -53,9 +76,16 @@
         var pesan = '<?= $pesan ?>';
         var error = '<?= $keterangan ?>';
         Swal.fire({
-            icon: 'error',
             title: pesan,
-            html: '[x]' + error
+            html: '[x]' + error,
+            icon: 'error',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Coba lagi ?'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $('#tambahModal').modal('show');
+            }
         })
     </script>
 <?php endif; ?>
@@ -74,8 +104,6 @@
             title: pesan,
             html: value
         })
-        console.log(teks);
-        console.log(teks1);
     </script>
 <?php endif; ?>
 
@@ -93,13 +121,13 @@
                 <div class="modal-body">
                     <div class="form-group has-success">
                         <label for="nama" class="control-label mb-1">Nama Item</label>
-                        <input id="nama" name="nama" type="text" class="form-control">
+                        <input id="nama" name="nama" type="text" class="form-control <?= ($validation->hasError('nama') ? 'is-invalid' : ''); ?>" value="<?= old('nama'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="deskripsi" class="control-label mb-1">Deskripsi Item</label>
-                        <textarea name="deskripsi" id="deskripsi" rows="9" placeholder="Masukkan deskripsi item" class="form-control"></textarea>
+                        <textarea name="deskripsi" id="deskripsi" rows="9" placeholder="Masukkan deskripsi item" class="form-control <?= ($validation->hasError('deskripsi') ? 'is-invalid' : ''); ?>"><?= old('deskripsi'); ?></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class=" form-group">
                         <label for="harga">Harga</label>
                         <div class="row form-group">
                             <div class="col col-md-12">
@@ -107,7 +135,7 @@
                                     <div class="input-group-addon">
                                         Rp.
                                     </div>
-                                    <input type="text" id="harga" name="harga" onkeyup="convertToRupiah(this);" placeholder="10,000" class="form-control">
+                                    <input type="text" id="harga" name="harga" onkeyup="convertToRupiah(this);" placeholder="10,000" class="form-control <?= ($validation->hasError('harga') ? 'is-invalid' : ''); ?>" value="<?= old('harga'); ?>">
                                 </div>
                             </div>
                         </div>

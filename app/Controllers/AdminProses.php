@@ -43,17 +43,21 @@ class AdminProses extends BaseController
             ]);
             return redirect()->to(base_url('admin/item'))->withInput();
         } else {
-            // $item = $this->item;
-            // $item->save([
-            //     'nama' => $nama,
-            //     'deskripsi' => $deskripsi,
-            //     'harga' => $harga
-            // ]);
+            $item = $this->item;
+            $item->save([
+                'nama' => $nama,
+                'deskripsi' => $deskripsi,
+                'harga' => $harga
+            ]);
             session()->setFlashdata('sukses', [
                 'pesan' => 'Mantap.',
                 'value' => 'Berhasil menyimpan Item.'
             ]);
-            return redirect()->to(base_url('admin/item'))->withInput();
+            return redirect()->to(base_url('admin/item'));
         }
+    }
+    public function hapus_item($id)
+    {
+        echo 'idnya ' . $id;
     }
 }
