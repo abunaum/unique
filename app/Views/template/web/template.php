@@ -20,6 +20,9 @@
 
   <!-- Template Stylesheet -->
   <link href="<?= base_url('css/style.css') ?>" rel="stylesheet">
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
 </head>
 
 <body>
@@ -126,7 +129,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="copyright-text">
-            <p>Copyright &copy; <?= date('Y') ?> Uniqie</p>
+            <p>Copyright &copy; <?= date('Y') ?> <?= $_SERVER['HTTP_HOST'] ?></p>
           </div>
         </div>
       </div>
@@ -137,7 +140,7 @@
   <!-- JavaScript Libraries -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
 </body>
 
 </html>

@@ -4,6 +4,15 @@
 </li>
 <li class="has-sub">
     <a class="js-arrow" href="#">
+        <i class="fab fa-fw fa-accusoft"></i></i>Gateway</a>
+    <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
+        <li>
+            <a href="<?= base_url('admin/payment'); ?>">Payment Gateway</a>
+        </li>
+    </ul>
+</li>
+<li class="has-sub">
+    <a class="js-arrow" href="#">
         <i class="fas fa-fw fa-sitemap"></i>Item</a>
     <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
         <li>

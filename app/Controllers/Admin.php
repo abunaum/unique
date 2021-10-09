@@ -24,4 +24,15 @@ class Admin extends BaseController
         ];
         return view('admin/item', $data);
     }
+
+    public function payment()
+    {
+        $payment = $this->payment->where('id', 1)->first();;
+        $data = [
+            'judul' => 'Payment',
+            'payment' => $payment,
+            'validation' => \Config\Services::validation()
+        ];
+        return view('admin/payment', $data);
+    }
 }
