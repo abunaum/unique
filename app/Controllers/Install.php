@@ -79,7 +79,7 @@ class Install extends BaseController
         $str = str_replace($olddbprefix, $newdbprefix, $str);
 
         //write the entire string
-        file_put_contents('../enp', $str);
+        file_put_contents('../.env', $str);
 
         unlink('../app/Config/Routes.php');
         $routes = '../installer/Routes.php';
