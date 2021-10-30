@@ -15,7 +15,7 @@
                     </div>
                     <div class="login-form">
                         <center>
-                            <form action="<?= base_url('cekdb') ?>" method="get">
+                            <form action="<?= base_url('cekdb') ?>" method="post">
                                 <?php
                                 if (session('koneksi_info')) {
                                     echo session('koneksi_status');
