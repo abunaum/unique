@@ -13,15 +13,27 @@ class PaymentApiLibrary extends BaseController
         $builder = $db->table('payment');
         $builder->where('id', 1);
         $apidb = $builder->get()->getFirstRow();
-        $this->apikey = $apidb->apikey;
-        $this->apiprivatekey = $apidb->apiprivatekey;
-        $this->kodemerchant = $apidb->kodemerchant;
-        $jenis = $apidb->jenis;
-        $this->urlcreatepayment = 'https://tripay.co.id/' . $jenis . '/transaction/create';
-        $this->urlpaymentchannel = 'https://tripay.co.id/' . $jenis . '/merchant/payment-channel';
-        $this->urlfeekalkulator = 'https://tripay.co.id/' . $jenis . '/merchant/fee-calculator?';
-        $this->detailtransaksiurl = 'https://tripay.co.id/' . $jenis . '/transaction/detail?';
-        $this->callback = base_url($apidb->callback);
+        if ($apidb) {
+            $this->apikey = $apidb->apikey;
+            $this->apiprivatekey = $apidb->apiprivatekey;
+            $this->kodemerchant = $apidb->kodemerchant;
+            $jenis = $apidb->jenis;
+            $this->urlcreatepayment = 'https://tripay.co.id/' . $jenis . '/transaction/create';
+            $this->urlpaymentchannel = 'https://tripay.co.id/' . $jenis . '/merchant/payment-channel';
+            $this->urlfeekalkulator = 'https://tripay.co.id/' . $jenis . '/merchant/fee-calculator?';
+            $this->detailtransaksiurl = 'https://tripay.co.id/' . $jenis . '/transaction/detail?';
+            $this->callback = base_url($apidb->callback);
+        } else {
+            $this->apikey = '';
+            $this->apiprivatekey = '';
+            $this->kodemerchant = '';
+            $jenis = '';
+            $this->urlcreatepayment = '';
+            $this->urlpaymentchannel = '';
+            $this->urlfeekalkulator = '';
+            $this->detailtransaksiurl = '';
+            $this->callback = '';
+        }
     }
     public function getmerchant()
     {

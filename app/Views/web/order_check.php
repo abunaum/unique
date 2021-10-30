@@ -73,7 +73,7 @@
                         <select class="form-control" id="channel">
                             <?php foreach ($pembayaran as $channel) : ?>
                                 <?php
-                                $nama = $channel['nama'];
+                                $nama = $channel['code'];
                                 $flat = $channel['flat'];
                                 $percent = $channel['percent'];
                                 $harga = $order['harga'];

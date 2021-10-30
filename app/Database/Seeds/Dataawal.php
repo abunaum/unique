@@ -79,5 +79,16 @@ class Dataawal extends Seeder
             ]
         ];
         $this->db->table('menu')->insertBatch($menu);
+
+        $payment = [
+            'apikey' => 'xxxxxxxxxxxx',
+            'apiprivatekey' => 'xxxxxxxxxxxx',
+            'kodemerchant' => 'xxxxxxxxxxxx',
+            'callback' => 'xxxxxxxxxxxx',
+            'jenis' => 'sandbox',
+            'created_at' => Time::now(),
+            'updated_at' => Time::now()
+        ];
+        $this->db->table('payment')->insert($payment);
     }
 }
