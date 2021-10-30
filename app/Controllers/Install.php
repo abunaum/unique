@@ -83,7 +83,7 @@ class Install extends BaseController
 
         unlink('../app/Config/Routes.php');
         $routes = '../installer/Routes.php';
-        $newroutes = '../app/Config/Routes_test.php';
+        $newroutes = '../app/Config/Routes.php';
 
         if (!copy($routes, $newroutes)) {
             echo "failed to copy $routes...\n";
