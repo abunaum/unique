@@ -38,7 +38,29 @@
         </li>
     </ul>
 </li>
+<br>
+<form action="<?= base_url('admin/uninstall') ?>" method="post" id="form-uninstall">
+    <?= csrf_field(); ?>
+    <button type="button" class="btn btn-danger" onclick="uninstall()">
+        Uninstall
+    </button>
+</form>
 <?php
 $date = date('d F Y h:i:s a');
 echo $date;
 ?>
+<script type="text/javascript">
+    function uninstall() {
+        Swal.fire({
+            title: 'Yakin mau Uninstall ?',
+            showCancelButton: true,
+            confirmButtonText: 'Uninstall',
+            cancelButtonText: 'Batal',
+            showLoaderOnConfirm: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("form-uninstall").submit();
+            }
+        })
+    }
+</script>

@@ -31,6 +31,13 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+$routes->get('complete_install', function () {
+    $installer = '../app/Controllers/Install.php';
+    if (file_exists($installer)) {
+        unlink('../app/Controllers/Install.php');
+    }
+    return redirect()->to(base_url());
+});
 $routes->get('/', 'Home::index');
 $routes->get('/layanan', 'Home::layanan');
 $routes->get('/privasi', 'Home::privasi');
@@ -47,6 +54,7 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->post('tambah_item', 'AdminProses::tambah_item');
     $routes->post('edit_item/(:num)', 'AdminProses::edit_item/$1');
     $routes->delete('item/(:num)', 'AdminProses::hapus_item/$1');
+    $routes->post('uninstall', 'AdminProses::uninstall');
 });
 
 /*

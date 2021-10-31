@@ -23,7 +23,7 @@ class Dataawal extends Seeder
 
         $user = [
             [
-                'email' => 'admin@unique.com',
+                'email' => 'abunaumv3@gmailcom',
                 'username' => 'admin',
                 'password_hash' => '$2y$10$PZoSwgYf7eUoJGy893AwD.Ytd.CIRJC9GGpZIbUcT7bvPWStEBZzW',
                 'active' => 1,
@@ -32,7 +32,7 @@ class Dataawal extends Seeder
                 'updated_at' => Time::now()
             ],
             [
-                'email' => 'seller@unique.com',
+                'email' => 'andialfa11@gmail.com',
                 'username' => 'seller',
                 'password_hash' => '$2y$10$PZoSwgYf7eUoJGy893AwD.Ytd.CIRJC9GGpZIbUcT7bvPWStEBZzW',
                 'active' => 1,

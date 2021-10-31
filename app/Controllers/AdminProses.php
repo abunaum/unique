@@ -6,6 +6,56 @@ use App\Controllers\BaseController;
 
 class AdminProses extends BaseController
 {
+    public function uninstall()
+    {
+        helper('filesystem');
+        $view = '../installer/install';
+        $newview = '../app/Views/install';
+        try {
+            directory_mirror($view, $newview, true);
+        } catch (\Config\Exceptions $e) {
+            echo 'Failed to export uploads!';
+        }
+        $view = '../installer/install';
+        $newview = '../app/Views/install';
+
+        $forge = \Config\Database::forge();
+        $forge->dropTable('auth_activation_attempts', false, true);
+        $forge->dropTable('auth_groups', false, true);
+        $forge->dropTable('auth_groups_permissions', false, true);
+        $forge->dropTable('auth_groups_users', false, true);
+        $forge->dropTable('auth_logins', false, true);
+        $forge->dropTable('auth_permissions', false, true);
+        $forge->dropTable('auth_reset_attempts', false, true);
+        $forge->dropTable('auth_tokens', false, true);
+        $forge->dropTable('auth_users_permissions', false, true);
+        $forge->dropTable('menu', false, true);
+        $forge->dropTable('migrations', false, true);
+        $forge->dropTable('order', false, true);
+        $forge->dropTable('payment', false, true);
+        $forge->dropTable('users', false, true);
+
+        $routesbackup = '../app/Config/Routes.php';
+        $newroutesbackup = '../installer/Routes.php';
+
+        if (!copy($routesbackup, $newroutesbackup)) {
+            echo "failed to copy $routesbackup...\n";
+        }
+
+        $routes = '../installer/Routesinstaller.php';
+        $newroutes = '../app/Config/Routes.php';
+
+        if (!copy($routes, $newroutes)) {
+            echo "failed to copy $routes...\n";
+        }
+        $control = '../installer/Install.php';
+        $newcontrol = '../app/Controllers/Install.php';
+
+        if (!copy($control, $newcontrol)) {
+            echo "failed to copy $control...\n";
+        }
+        return redirect()->to(base_url());
+    }
     public function tambah_item()
     {
         $validasi = \Config\Services::validation();
