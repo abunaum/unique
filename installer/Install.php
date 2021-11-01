@@ -3,9 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\I18n\Time;
 
 class Install extends BaseController
 {
+    public function __construct()
+    {
+        $this->google = new \Google_Client();;
+        $this->google->setClientId('935030474584-ppg52lsgm2b3vmloph8okrbbdmu278b6.apps.googleusercontent.com');
+        $this->google->setClientSecret('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');
+        $this->google->addScope('email');
+        $this->google->addScope('profile');
+        $this->google->setRedirectUri(base_url('installadduser'));
+        $this->logingoogle = $this->google->createAuthUrl();
+    }
     public function index()
     {
         return view('install/beranda');
@@ -50,7 +61,7 @@ class Install extends BaseController
         $url .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 
         $oldenv = '# CI_ENVIRONMENT = production';
-        $newenv = 'CI_ENVIRONMENT = production';
+        $newenv = 'CI_ENVIRONMENT = development';
         $oldhost = '# database.default.hostname = localhost';
         $newhost = 'database.default.hostname = localhost';
         $olddb = '# database.default.database = ci4';
@@ -78,14 +89,6 @@ class Install extends BaseController
 
         file_put_contents('../.env', $str);
 
-        unlink('../app/Config/Routes.php');
-        $routes = '../installer/Routes.php';
-        $newroutes = '../app/Config/Routes.php';
-
-        if (!copy($routes, $newroutes)) {
-            echo "failed to copy $routes...\n";
-        }
-
         $forge = \Config\Database::forge();
         $forge->dropTable('auth_activation_attempts', true, true);
         $forge->dropTable('auth_groups', true, true);
@@ -109,10 +112,57 @@ class Install extends BaseController
         } catch (\Throwable $e) {
             die($e->getMessage());
         }
-        $seeder = \Config\Database::seeder();
-        $seeder->call('Dataawal');
-        delete_files('../app/Views/install/');
-        rmdir('../app/Views/install');
-        return redirect()->to(base_url('complete_install'));
+
+        return redirect()->to(base_url('adduser'));
+    }
+
+    public function adduser()
+    {
+        $data = [
+            'logingoogle' => $this->logingoogle
+        ];
+        return view('install/adduser', $data);
+    }
+
+    public function padduser()
+    {
+        $token = $this->google->fetchAccessTokenWithAuthCode($this->request->getVar('code'));
+        if (!isset($token['error'])) {
+            $this->google->setAccessToken($token['access_token']);
+            session()->set("AccessToken", $token['access_token']);
+
+            $googleService = new \Google\Service\Oauth2($this->google);
+            $data = $googleService->userinfo->get();
+            $email = $data->email;
+            $gambar = $data->picture;
+
+            $adduser = new \App\Models\Userconf();
+            $userdata = [
+                'oauth_id' => $data->id,
+                'name' => $data->name,
+                'username' => 'admin',
+                'email' => $email,
+                'profile' => $gambar,
+                'active' => 1,
+                'force_pass_reset' => 0,
+                'created_at' => Time::now(),
+                'updated_at' => Time::now()
+            ];
+            $adduser->save($userdata);
+
+            $seeder = \Config\Database::seeder();
+            $seeder->call('Dataawal');
+
+            unlink('../app/Config/Routes.php');
+            $routes = file_get_contents('../installer/Routes.php');
+            file_put_contents('../app/Config/Routes.php', $routes);
+            return redirect()->to(base_url('complete_install'));
+        } else {
+            session()->setFlashdata('gagal', [
+                'pesan' => 'Gagal login.',
+                'value' => 'Autentikasi google gagal'
+            ]);
+            return redirect()->to(base_url());
+        }
     }
 }

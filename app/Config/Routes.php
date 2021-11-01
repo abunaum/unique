@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Install::index');
 $routes->post('cekdb', 'Install::cekdb');
+$routes->get('adduser', 'Install::adduser');
+$routes->get('installadduser', 'Install::padduser');
 
 /*
  * --------------------------------------------------------------------

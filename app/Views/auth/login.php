@@ -52,6 +52,19 @@
                             <?php endif; ?>
                             <hr>
                             <button type="submit" class="btn btn-primary btn-user btn-block"><?= lang('Auth.loginAction') ?></button>
+                            <hr>
+                            <?php
+                            $this->google = new \Google_Client();;
+                            $this->google->setClientId('935030474584-ppg52lsgm2b3vmloph8okrbbdmu278b6.apps.googleusercontent.com');
+                            $this->google->setClientSecret('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');
+                            $this->google->setRedirectUri(base_url('authgoogle'));
+                            $this->google->addScope('email');
+                            $this->google->addScope('profile');
+                            $logingoogle = $this->google->createAuthUrl();
+                            ?>
+                            <center>
+                                <a href="<?= $logingoogle; ?>" class="btn btn-success btn-user btn-block">Login Google</a>
+                            </center>
                         </form>
                         <hr>
                         <div class="text-center">
@@ -77,8 +90,35 @@
             </div>
         </div>
     </div>
-
 </div>
 
+<?php if (session()->getFlashdata('gagal')) : ?>
+    <?php
+    $flash = session()->getFlashdata('gagal');
+    $pesan = $flash['pesan'];
+    $value = $flash['value'];
+    ?>
+    <script type="text/javascript">
+        var pesan = '<?= $pesan ?>';
+        var value = '<?= $value ?>';
+        let timerInterval
+        Swal.fire({
+            icon: 'error',
+            title: pesan,
+            html: value,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                timerInterval = setInterval(() => 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {}
+        })
+    </script>
+<?php endif; ?>
 
 <?= $this->endSection(); ?>

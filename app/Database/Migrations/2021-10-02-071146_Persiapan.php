@@ -13,10 +13,13 @@ class Persiapan extends Migration
          */
         $this->forge->addField([
             'id'               => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'oauth_id'         => ['type' => 'varchar', 'constraint' => 255],
+            'name'             => ['type' => 'varchar', 'constraint' => 255],
             'email'            => ['type' => 'varchar', 'constraint' => 255],
             'username'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'password_hash'    => ['type' => 'varchar', 'constraint' => 255],
             'reset_hash'       => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
+            'profile'          => ['type' => 'varchar', 'constraint' => 255],
             'reset_at'         => ['type' => 'datetime', 'null' => true],
             'reset_expires'    => ['type' => 'datetime', 'null' => true],
             'activate_hash'    => ['type' => 'varchar', 'constraint' => 255, 'null' => true],

@@ -36,7 +36,10 @@ $routes->get('complete_install', function () {
     if (file_exists($installer)) {
         unlink('../app/Controllers/Install.php');
     }
-    return redirect()->to(base_url());
+    $viewdir = '../app/Views/install/';
+    array_map('unlink', glob("$viewdir/*.*"));
+    rmdir($viewdir);
+    return redirect()->to(base_url('admin'));
 });
 $routes->get('/', 'Home::index');
 $routes->get('/layanan', 'Home::layanan');
@@ -46,6 +49,8 @@ $routes->get('/category/(:num)', 'Home::category/$1');
 $routes->get('/order_check/(:num)', 'Home::order_check/$1');
 $routes->post('/order/(:num)', 'Home::order/$1');
 
+$routes->get('authgoogle', 'Gauth::check');
+$routes->get('cekrole', 'Gauth::cekrole');
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('/', 'Admin::index');
     $routes->get('payment', 'Admin::payment');
@@ -56,7 +61,6 @@ $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
     $routes->delete('item/(:num)', 'AdminProses::hapus_item/$1');
     $routes->post('uninstall', 'AdminProses::uninstall');
 });
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing

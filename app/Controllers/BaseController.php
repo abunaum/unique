@@ -47,15 +47,17 @@ class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
-
-        // E.g.: $this->session = \Config\Services::session();
+        $this->userconf = new \App\Models\Userconf();
         $this->item = new \App\Models\Item();
         $this->order = new \App\Models\Order();
         $this->payment = new \App\Models\Payment();
 
+        // E.g.: $this->session = \Config\Services::session();
+
         //helper
 
         helper('auth');
+        helper('filesystem');
         session();
     }
 }

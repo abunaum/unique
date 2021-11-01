@@ -32,6 +32,7 @@
     <link rel="shortcut icon" href="<?= base_url(); ?>/tokolancer.ico">
     <!-- Main CSS-->
     <link href="https://cdn.jsdelivr.net/gh/abunaum/naum-market-css-js@master/mypanel/css/theme.css" rel="stylesheet" media="all">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 

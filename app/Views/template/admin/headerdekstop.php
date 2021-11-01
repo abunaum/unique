@@ -14,15 +14,15 @@
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="image">
-                                <img src="<?= base_url('images/profile.png') ?>" />
+                                <img src="<?= user()->profile; ?>" />
                             </div>
                             <div class="content">
-                                <a class="js-acc-btn" href="#"><?= user()->username; ?></a>
+                                <a class="js-acc-btn" href="#"><?= user()->name; ?></a>
                             </div>
                             <div class="account-dropdown js-dropdown">
                                 <div class="info clearfix">
                                     <div class="image">
-                                        <img src="<?= base_url('images/profile.png') ?>" />
+                                        <img src="<?= user()->profile; ?>" />
                                     </div>
                                     <div class="content">
                                         <h5 class="name">
