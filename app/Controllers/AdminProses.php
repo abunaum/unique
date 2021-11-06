@@ -41,7 +41,7 @@ class AdminProses extends BaseController
 
         $control = file_get_contents('../installer/Install.php');
         file_put_contents('../app/Controllers/Install.php', $control);
-        
+
         session()->destroy();
         return redirect()->to(base_url());
     }
@@ -92,6 +92,7 @@ class AdminProses extends BaseController
                 'pesan' => 'Mantap.',
                 'value' => 'Berhasil menyimpan Item.'
             ]);
+            session()->setFlashdata('websocket', 'edit_item');
             return redirect()->to(base_url('admin/item'));
         }
     }
@@ -105,6 +106,7 @@ class AdminProses extends BaseController
             'pesan' => 'Mantap.',
             'value' => 'Berhasil menghapus ' . $nama
         ]);
+        session()->setFlashdata('websocket', 'edit_item');
         return redirect()->to(base_url('admin/item'));
     }
     public function edit_item($id)
@@ -155,6 +157,7 @@ class AdminProses extends BaseController
                 'pesan' => 'Mantap.',
                 'value' => 'Berhasil mengedit ' . $nama
             ]);
+            session()->setFlashdata('websocket', 'edit_item');
             return redirect()->to(base_url('admin/item'));
         }
     }

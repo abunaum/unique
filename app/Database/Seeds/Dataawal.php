@@ -57,7 +57,7 @@ class Dataawal extends Seeder
             'apiprivatekey' => 'xxxxxxxxxxxx',
             'kodemerchant' => 'xxxxxxxxxxxx',
             'callback' => 'xxxxxxxxxxxx',
-            'jenis' => 'sandbox',
+            'jenis' => 'api-sandbox',
             'created_at' => Time::now(),
             'updated_at' => Time::now()
         ];

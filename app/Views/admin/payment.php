@@ -22,7 +22,7 @@
                     <div class="form-group has-success">
                         <label for="jenis" class="control-label mb-1">Jenis</label>
                         <select class="form-control" id="jenis" name="jenis">
-                            <?php if ($payment['jenis'] == 'sandbox') : ?>
+                            <?php if ($payment['jenis'] == 'api-sandbox') : ?>
                                 <option value="api-sandbox">Sandbox</option>
                                 <option value="api">Real Merchat</option>
                             <?php else : ?>

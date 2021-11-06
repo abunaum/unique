@@ -42,16 +42,7 @@
           <ul class="navbar-nav ">
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">Templates</a>
-              <div class="dropdown-menu">
-                <?php
-                $db      = \Config\Database::connect();
-                $menu = $db->table('menu')->get()->getResult();
-                ?>
-                <?php
-                foreach ($menu as $m) :
-                ?>
-                  <a href="<?= base_url('category/' . $m->id) ?>" class="dropdown-item"><?= $m->nama; ?></a>
-                <?php endforeach; ?>
+              <div class="dropdown-menu" id="menu">
               </div>
             </div>
             <div class="nav-item dropdown">
@@ -86,18 +77,22 @@
           <h3 class="title">Tautan Cepat</h3>
           <div class="footer-menu">
             <ul>
-              <li><a href="<?= base_url('layanan') ?>">Ketentuan Layanan</a></li>
-              <li><a href="<?= base_url('privasi') ?>">Kebijakan Privasi</a></li>
-              <li><a href="<?= base_url('tentang') ?>">Tentang Kami</a></li>
+              <div class="d-inline">
+                <li><a href="<?= base_url('layanan') ?>">Ketentuan Layanan</a></li>
+                <li><a href="<?= base_url('privasi') ?>">Kebijakan Privasi</a></li>
+                <li><a href="<?= base_url('tentang') ?>">Tentang Kami</a></li>
+              </div>
               <?php
               $db      = \Config\Database::connect();
               $menu = $db->table('menu')->get()->getResult();
               ?>
-              <?php
-              foreach ($menu as $m) :
-              ?>
-                <li><a href="<?= base_url('category/' . $m->id) ?>"><?= $m->nama; ?></a></li>
-              <?php endforeach; ?>
+              <div class="d-inline" id="hal">
+                <?php
+                foreach ($menu as $m) :
+                ?>
+                  <li><a href="<?= base_url('category/' . $m->id) ?>"><?= $m->nama; ?></a></li>
+                <?php endforeach; ?>
+              </div>
             </ul>
           </div>
         </div>
@@ -141,6 +136,57 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+  <script>
+    url_item = '<?= base_url('api/cek_item') ?>';
+    $.ajax({
+      url: url_item,
+      type: 'POST',
+      async: true,
+      dataType: 'json',
+      success: function(data) {
+        var hal = '';
+        var count = 1;
+        var i;
+        $("#menu").empty();
+        for (i = 0; i < data.length; i++) {
+          menu += '<a href="<?= base_url('category') . '/' ?>' + data[i].id + '" class="dropdown-item">' + data[i].nama + '</a>';
+          hal += '<li><a href="<?= base_url('category') . '/' ?>' + data[i].id + '">' + data[i].nama + '</a></li>';
+        }
+        $('#menu').html(menu);
+        $('#hal').html(hal);
+      }
+    });
+
+    var conn = new WebSocket('ws://localhost:5051');
+    conn.onopen = function(e) {
+      console.log("Connection established!");
+    };
+
+    conn.onmessage = function(e) {
+      if (e.data == 'edit_item') {
+        url_item = '<?= base_url('api/cek_item') ?>';
+        $.ajax({
+          url: url_item,
+          type: 'POST',
+          async: true,
+          dataType: 'json',
+          success: function(data) {
+            var menu = '';
+            var hal = '';
+            var count = 1;
+            var i;
+            $("#menu").empty();
+            for (i = 0; i < data.length; i++) {
+              menu += '<a href="<?= base_url('category') . '/' ?>' + data[i].id + '" class="dropdown-item">' + data[i].nama + '</a>';
+              hal += '<li><a href="<?= base_url('category') . '/' ?>' + data[i].id + '">' + data[i].nama + '</a></li>';
+            }
+            $('#menu').html(menu);
+            $('#hal').html(hal);
+          }
+        });
+      }
+    };
+  </script>
 </body>
 
 </html>

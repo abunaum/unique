@@ -49,6 +49,10 @@ $routes->get('/category/(:num)', 'Home::category/$1');
 $routes->get('/order_check/(:num)', 'Home::order_check/$1');
 $routes->post('/order/(:num)', 'Home::order/$1');
 
+$routes->group('api', function ($routes) {
+    $routes->post('item', 'Api::cek_item');
+});
+
 $routes->get('authgoogle', 'Gauth::check');
 $routes->get('cekrole', 'Gauth::cekrole');
 $routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
