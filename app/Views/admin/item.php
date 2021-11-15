@@ -15,7 +15,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $nomor = 1 ?>
+                        <?php
+
+                        use Google\Service\AIPlatformNotebooks\Execution;
+
+                        $nomor = 1 ?>
                         <?php foreach ($item as $i) : ?>
                             <tr>
                                 <?php

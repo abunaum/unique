@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Install');
+$routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -31,11 +31,40 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Install::index');
-$routes->post('cekdb', 'Install::cekdb');
-$routes->get('adduser', 'Install::adduser');
-$routes->get('installadduser', 'Install::padduser');
+$routes->get('complete_install', function () {
+    $installer = '../app/Controllers/Install.php';
+    if (file_exists($installer)) {
+        unlink('../app/Controllers/Install.php');
+    }
+    $viewdir = '../app/Views/install/';
+    array_map('unlink', glob("$viewdir/*.*"));
+    rmdir($viewdir);
+    return redirect()->to(base_url('admin'));
+});
+$routes->get('/', 'Home::index');
+$routes->get('/layanan', 'Home::layanan');
+$routes->get('/privasi', 'Home::privasi');
+$routes->get('/tentang', 'Home::tentang');
+$routes->get('/category/(:num)', 'Home::category/$1');
+$routes->get('/order_check/(:num)', 'Home::order_check/$1');
+$routes->post('/order/(:num)', 'Home::order/$1');
 
+$routes->group('api', function ($routes) {
+    $routes->post('item', 'Api::cek_item');
+});
+
+$routes->get('authgoogle', 'Gauth::check');
+$routes->get('cekrole', 'Gauth::cekrole');
+$routes->group('admin', ['filter' => 'role:admin'], function ($routes) {
+    $routes->get('/', 'Admin::index');
+    $routes->get('payment', 'Admin::payment');
+    $routes->post('edit_payment', 'AdminProses::edit_payment');
+    $routes->get('item', 'Admin::item');
+    $routes->post('tambah_item', 'AdminProses::tambah_item');
+    $routes->post('edit_item/(:num)', 'AdminProses::edit_item/$1');
+    $routes->delete('item/(:num)', 'AdminProses::hapus_item/$1');
+    $routes->post('uninstall', 'AdminProses::uninstall');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

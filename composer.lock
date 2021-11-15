@@ -175,16 +175,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "d2113d9b2e0e349796e72d2a63cf9319100382d2"
+                "reference": "cf814442ce0e9eebe5317d61b63ccda4b85de67a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/d2113d9b2e0e349796e72d2a63cf9319100382d2",
-                "reference": "d2113d9b2e0e349796e72d2a63cf9319100382d2",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/cf814442ce0e9eebe5317d61b63ccda4b85de67a",
+                "reference": "cf814442ce0e9eebe5317d61b63ccda4b85de67a",
                 "shasum": ""
             },
             "require": {
@@ -226,9 +226,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v5.4.0"
+                "source": "https://github.com/firebase/php-jwt/tree/v5.5.0"
             },
-            "time": "2021-06-23T19:00:23+00:00"
+            "time": "2021-11-04T16:21:41+00:00"
         },
         {
             "name": "google/apiclient",
@@ -303,16 +303,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.219.0",
+            "version": "v0.220.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "ea990973edf24d959c9e9f550182a53672d5a4bc"
+                "reference": "95d9913a54d870c49776375e2327dcee1a2e5919"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/ea990973edf24d959c9e9f550182a53672d5a4bc",
-                "reference": "ea990973edf24d959c9e9f550182a53672d5a4bc",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/95d9913a54d870c49776375e2327dcee1a2e5919",
+                "reference": "95d9913a54d870c49776375e2327dcee1a2e5919",
                 "shasum": ""
             },
             "require": {
@@ -341,9 +341,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.219.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.220.0"
             },
-            "time": "2021-10-06T11:20:29+00:00"
+            "time": "2021-11-05T14:29:41+00:00"
         },
         {
             "name": "google/auth",
@@ -3551,20 +3551,20 @@
         },
         {
             "name": "psr/container",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/container.git",
-                "reference": "2ae37329ee82f91efadc282cc2d527fd6065a5ef"
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/2ae37329ee82f91efadc282cc2d527fd6065a5ef",
-                "reference": "2ae37329ee82f91efadc282cc2d527fd6065a5ef",
+                "url": "https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963",
+                "reference": "c71ecc56dfe541dbd90c5360474fbc405f8d5963",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.0"
+                "php": ">=7.4.0"
             },
             "type": "library",
             "extra": {
@@ -3598,9 +3598,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-fig/container/issues",
-                "source": "https://github.com/php-fig/container/tree/2.0.1"
+                "source": "https://github.com/php-fig/container/tree/2.0.2"
             },
-            "time": "2021-03-24T13:40:57+00:00"
+            "time": "2021-11-05T16:47:00+00:00"
         },
         {
             "name": "sebastian/cli-parser",

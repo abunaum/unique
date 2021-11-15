@@ -12,10 +12,11 @@
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div class="grid_container"></div>
-                        <p>
-                            <?= $kategori['deskripsi']; ?>
-                        </p>
+                        <div class="grid_container mb-3">
+                            <p>
+                                <?= $kategori['deskripsi']; ?>
+                            </p>
+                        </div>
                         <form action="<?= base_url('order/' . $kategori['id']); ?>" method="post">
                             <?= csrf_field(); ?>
                             <div class="mb-3">

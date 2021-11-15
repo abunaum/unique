@@ -82,16 +82,7 @@
                 <li><a href="<?= base_url('privasi') ?>">Kebijakan Privasi</a></li>
                 <li><a href="<?= base_url('tentang') ?>">Tentang Kami</a></li>
               </div>
-              <?php
-              $db      = \Config\Database::connect();
-              $menu = $db->table('menu')->get()->getResult();
-              ?>
               <div class="d-inline" id="hal">
-                <?php
-                foreach ($menu as $m) :
-                ?>
-                  <li><a href="<?= base_url('category/' . $m->id) ?>"><?= $m->nama; ?></a></li>
-                <?php endforeach; ?>
               </div>
             </ul>
           </div>
@@ -145,9 +136,9 @@
       dataType: 'json',
       success: function(data) {
         var hal = '';
+        var menu = '';
         var count = 1;
         var i;
-        $("#menu").empty();
         for (i = 0; i < data.length; i++) {
           menu += '<a href="<?= base_url('category') . '/' ?>' + data[i].id + '" class="dropdown-item">' + data[i].nama + '</a>';
           hal += '<li><a href="<?= base_url('category') . '/' ?>' + data[i].id + '">' + data[i].nama + '</a></li>';
@@ -176,6 +167,7 @@
             var count = 1;
             var i;
             $("#menu").empty();
+            $("#hal").empty();
             for (i = 0; i < data.length; i++) {
               menu += '<a href="<?= base_url('category') . '/' ?>' + data[i].id + '" class="dropdown-item">' + data[i].nama + '</a>';
               hal += '<li><a href="<?= base_url('category') . '/' ?>' + data[i].id + '">' + data[i].nama + '</a></li>';
